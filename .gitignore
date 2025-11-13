@@ -2,8 +2,8 @@
 node_modules/
 package-lock.json
 
-# Build outputs
-dist/
+# Build outputs (keep dist/ for GitHub Pages deployment)
+# dist/
 *.css.map
 
 # Environment variables
