@@ -43,10 +43,16 @@
         background: #000;
       }
 
+      @media (min-width: 768px) {
+        .fleet-slider {
+          height: 600px;
+        }
+      }
+
       /* Strong, visible nav buttons positioned inside the slider wrapper */
       .fleet-prev,
       .fleet-next {
-        z-index: 9999 !important;
+        z-index: 0;
         background: rgba(31, 41, 55, 0.95) !important;
         color: #fff !important;
         width: 56px !important;
@@ -378,7 +384,42 @@
             <!-- Slide 1 - pix2.jpg -->
             <div class="fleet-slide relative">
               <img
-                src="img/IMG-20250403-WA0073_063640.jpg"
+                src="img/lexus 470.webp"
+                alt="Fleet Vehicle 1"
+                class="md:h-[520px] object-cover"
+              />
+            </div>
+            <div class="fleet-slide relative">
+              <img
+                src="img/Toyota prada 2020.webp"
+                alt="Fleet Vehicle 1"
+                class="md:h-[520px] object-cover"
+              />
+            </div>
+            <div class="fleet-slide relative">
+              <img
+                src="img/2020 Toyota Land Cruiser.webp"
+                alt="Fleet Vehicle 1"
+                class="md:h-[520px] object-cover"
+              />
+            </div>
+            <div class="fleet-slide relative">
+              <img
+                src="img/2020-mercedes-benz-g-class-g-63-amg-g63-jl.webp"
+                alt="Fleet Vehicle 1"
+                class="md:h-[520px] object-cover"
+              />
+            </div>
+            <div class="fleet-slide relative">
+              <img
+                src="img/IMG-20250618-WA0034_063559.jpg"
+                alt="Fleet Vehicle 1"
+                class="md:h-[520px] object-cover"
+              />
+            </div>
+            <div class="fleet-slide relative">
+              <img
+                src="more/1000331043.jpg"
                 alt="Fleet Vehicle 1"
                 class="md:h-[520px] object-cover"
               />
@@ -573,11 +614,11 @@
             class="mt-8 h-[500px] max-w-4xl rounded-lg flex items-center justify-center"
           >
             <img
-              src="img/about.png"
+              src="img/2020-mercedes-benz-g-class-g-63-amg-g63-jl.webp"
               alt=""
               width="700"
-              height="600"
-              class="rounded-lg h-[400px] flex items-center justify-center object-cover object-[50%_45%]"
+              height="800"
+              class="rounded-lg h-[500px] flex items-center justify-center object-cover object-[50%_45%]"
             />
             <!-- <i class="fas fa-image text-6xl text-gray-400"></i> -->
           </div>
