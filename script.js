@@ -98,11 +98,15 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 
 // Fleet Slider
 
+// Fleet Slider
 document.addEventListener("DOMContentLoaded", function () {
   const slider = document.querySelector(".fleet-slider");
   const prevBtn = document.querySelector(".fleet-prev");
   const nextBtn = document.querySelector(".fleet-next");
   const dots = document.querySelectorAll(".fleet-dot");
+
+  // ✅ STOP if fleet slider does not exist (important)
+  if (!slider || !prevBtn || !nextBtn) return;
 
   let totalSlides = slider.children.length;
   let currentSlide = 0;
@@ -138,7 +142,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Auto-play
   function startAutoPlay() {
     autoPlay = setInterval(() => {
       currentSlide = (currentSlide + 1) % totalSlides;
@@ -157,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
   );
   slider.parentElement.addEventListener("mouseleave", startAutoPlay);
 
-  // Mobile swipe
+  // Swipe support
   let touchStartX = 0;
   slider.parentElement.addEventListener(
     "touchstart",
@@ -178,50 +181,8 @@ document.addEventListener("DOMContentLoaded", function () {
     { passive: true }
   );
 
-  // Start
   goToSlide(0);
   startAutoPlay();
-
-  // Gallery Slider (simple prev/next)
-  const gallery = document.querySelector(".gallery-slider");
-  const galleryPrev = document.querySelector(".gallery-prev");
-  const galleryNext = document.querySelector(".gallery-next");
-  if (gallery && galleryPrev && galleryNext) {
-    let galleryIndex = 0;
-    const galleryTotal = gallery.children.length;
-
-    function galleryGo(i) {
-      galleryIndex = (i + galleryTotal) % galleryTotal;
-      gallery.style.transform = `translateX(-${galleryIndex * 100}%)`;
-    }
-
-    galleryNext.addEventListener("click", () => {
-      galleryGo(galleryIndex + 1);
-    });
-
-    galleryPrev.addEventListener("click", () => {
-      galleryGo(galleryIndex - 1);
-    });
-
-    // swipe support
-    let gTouchStart = 0;
-    gallery.addEventListener(
-      "touchstart",
-      (e) => {
-        gTouchStart = e.touches[0].clientX;
-      },
-      { passive: true }
-    );
-    gallery.addEventListener(
-      "touchend",
-      (e) => {
-        const diff = gTouchStart - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 40)
-          diff > 0 ? galleryNext.click() : galleryPrev.click();
-      },
-      { passive: true }
-    );
-  }
 });
 
 // Update current year in footer

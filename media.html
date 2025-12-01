@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gioan - Media</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Your custom stylesheet (loads AFTER Tailwind so rules override) -->
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      .gallery-slider {
+        display: flex;
+        width: 100%;
+        transition: transform 0.6s ease-in-out;
+        will-change: transform;
+      }
+      .gallery-slide {
+        flex: 0 0 100%;
+        min-width: 100%;
+        max-width: 100%;
+        padding: 0 0.5rem;
+      }
+      .gallery-slide .media-card {
+        overflow: hidden;
+        border-radius: 0.5rem;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+      }
+      .gallery-slide img,
+      .gallery-slide .media-card {
+        height: 450px;
+        width: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      @media (min-width: 768px) {
+        .gallery-slide img,
+        .gallery-slide .media-card {
+          height: 500px;
+        }
+      }
+      .gallery-prev,
+      .gallery-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 50;
+      }
+      .gallery-prev {
+        left: 8px;
+      }
+      .gallery-next {
+        right: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="fixed w-full top-0 z-50 bg-white shadow-lg">
+      <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center py-4">
+          <div class="flex items-center">
+            <img
+              src="img/logo.png"
+              alt="Gioan Logistics Logo"
+              class="h-12 w-auto object-contain"
+            />
+          </div>
+          <div class="hidden md:flex space-x-6">
+            <a href="index.html" class="hover:text-blue-600 transition">Home</a>
+            <a href="index.html#about" class="hover:text-blue-600 transition"
+              >About</a
+            >
+            <a href="index.html#services" class="hover:text-blue-600 transition"
+              >Services</a
+            >
+            <a href="index.html#fleet" class="hover:text-blue-600 transition"
+              >Fleet</a
+            >
+            <a
+              href="index.htmlmedia.html"
+              class="hover:text-blue-600 transition"
+              >Gallery</a
+            >
+            <a href="index.html#contact" class="hover:text-blue-600 transition"
+              >Contact</a
+            >
+          </div>
+          <button id="mobileMenuBtn" class="md:hidden text-gray-700">
+            <i class="fas fa-bars text-2xl"></i>
+          </button>
+          <button id="closeMenuBtn" class="md:hidden text-gray-700 hidden">
+            <i class="fas fa-times text-2xl"></i>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Menu Overlay -->
+      <div
+        id="mobileMenuOverlay"
+        class="hidden md:hidden fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300"
+      ></div>
+
+      <!-- Mobile Menu Sidebar -->
+      <div
+        id="mobileMenu"
+        class="hidden md:hidden fixed top-15 z-150 right-0 h-[calc(100vh-4rem)] w-64 bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out"
+      >
+        <div class="flex flex-col h-full">
+          <!-- Menu Items -->
+          <div class="flex-1 px-2 py-2 space-y-1">
+            <a
+              href="index.html"
+              class="block py-2 px-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-all duration-200 transform hover:translate-x-2"
+              >Home</a
+            >
+            <a
+              href="index.html#about"
+              class="block py-2 px-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-all duration-200 transform hover:translate-x-2"
+              >About</a
+            >
+            <a
+              href="index.html#services"
+              class="block py-2 px-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-all duration-200 transform hover:translate-x-2"
+              >Services</a
+            >
+            <a
+              href="index.html#fleet"
+              class="block py-2 px-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-all duration-200 transform hover:translate-x-2"
+              >Fleet</a
+            >
+            <a
+              href="media.html"
+              class="block py-2 px-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-all duration-200 transform hover:translate-x-2"
+              >Gallery</a
+            >
+            <a
+              href="index.html#contact"
+              class="block py-2 px-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-all duration-200 transform hover:translate-x-2"
+              >Contact</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+    <section id="gallery" class="pt-24 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <h2 class="text-4xl font-bold text-center mb-10">
+          <span class="text-blue-600">MEDIA</span>
+          <span class="text-red-600">GALLERY</span>
+        </h2>
+
+        <!-- Gallery Slider Wrapper -->
+        <div class="relative max-w-4xl mx-auto overflow-hidden">
+          <div class="gallery-slider">
+            <!-- Slide 1 -->
+            <div class="gallery-slide">
+              <div class="media-card">
+                <img src="img/about.png" alt="Gallery 1" />
+              </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="gallery-slide">
+              <div class="media-card">
+                <img src="img/IMG-20250403-WA0073_063640.jpg" alt="Gallery 2" />
+              </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="gallery-slide">
+              <div class="media-card">
+                <img src="more/1000331036.jpg" alt="Gallery 3" />
+              </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="gallery-slide">
+              <div class="media-card">
+                <img src="img/IMG-20250408-WA0023_063642.jpg" alt="Gallery 4" />
+              </div>
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="gallery-slide">
+              <div class="media-card">
+                <img src="more/1000331038.jpg" alt="Gallery 5" />
+              </div>
+            </div>
+
+            <!-- Slide 6 -->
+            <div class="gallery-slide">
+              <div class="media-card">
+                <img src="img/IMG-20250412-WA0061_063621.jpg" alt="Gallery 6" />
+              </div>
+            </div>
+
+            <!-- Slide 7 -->
+            <div class="gallery-slide">
+              <div class="media-card">
+                <img src="more/1000331039.jpg" alt="Gallery 7" />
+              </div>
+            </div>
+
+            <!-- Slide 8 -->
+            <div class="gallery-slide">
+              <div class="media-card">
+                <img src="img/IMG-20250418-WA0044_063603.jpg" alt="Gallery 8" />
+              </div>
+            </div>
+
+            <!-- Slide 9 -->
+            <div class="gallery-slide">
+              <div class="media-card">
+                <img src="more/1000331043.jpg" alt="Gallery 9" />
+              </div>
+            </div>
+
+            <!-- Slide 10 -->
+            <div class="gallery-slide">
+              <div class="media-card">
+                <img
+                  src="img/IMG-20250618-WA0033_063557.jpg"
+                  alt="Gallery 10"
+                />
+              </div>
+            </div>
+
+            <!-- Slide 11 -->
+            <div class="gallery-slide">
+              <div class="media-card">
+                <img src="more/1000331047.jpg" alt="Gallery 11" />
+              </div>
+            </div>
+
+            <!-- Slide 12 -->
+            <div class="gallery-slide">
+              <div class="media-card">
+                <img
+                  src="img/IMG-20250618-WA0034_063559.jpg"
+                  alt="Gallery 12"
+                />
+              </div>
+            </div>
+
+            <!-- Slide 13 -->
+            <div class="gallery-slide">
+              <div class="media-card">
+                <img src="more/1000331055.jpg" alt="Gallery 13" />
+              </div>
+            </div>
+
+            <!-- Slide 14 -->
+            <div class="gallery-slide">
+              <div class="media-card">
+                <img
+                  src="img/IMG-20250618-WA0060_044837.jpg"
+                  alt="Gallery 14"
+                />
+              </div>
+            </div>
+
+            <!-- Slide 15 -->
+            <div class="gallery-slide">
+              <div class="media-card">
+                <img src="more/image copy 2.png" alt="Gallery 15" />
+              </div>
+            </div>
+
+            <!-- Slide 16 -->
+            <div class="gallery-slide">
+              <div class="media-card">
+                <img
+                  src="img/IMG-20250626-WA0006_063554.jpg"
+                  alt="Gallery 16"
+                />
+              </div>
+            </div>
+
+            <!-- Slide 17 -->
+            <div class="gallery-slide">
+              <div class="media-card">
+                <img src="more/image copy.png" alt="Gallery 17" />
+              </div>
+            </div>
+
+            <!-- Slide 18 -->
+            <div class="gallery-slide">
+              <div class="media-card">
+                <img
+                  src="img/IMG-20250629-WA0022_063552.jpg"
+                  alt="Gallery 18"
+                />
+              </div>
+            </div>
+
+            <!-- Slide 19 -->
+            <div class="gallery-slide">
+              <div class="media-card">
+                <img src="more/image.png" alt="Gallery 19" />
+              </div>
+            </div>
+
+            <!-- Slide 20 -->
+            <div class="gallery-slide">
+              <div class="media-card">
+                <img
+                  src="img/IMG_20250225_164944_095042.jpg"
+                  alt="Gallery 20"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Navigation Buttons -->
+          <button
+            class="gallery-prev absolute left-0 top-1/2 -translate-y-1/2 ml-2 bg-white/90 text-gray-800 w-10 h-10 rounded-full shadow-xl flex items-center justify-center"
+          >
+            <i class="fas fa-chevron-left"></i>
+          </button>
+
+          <button
+            class="gallery-next absolute right-0 top-1/2 -translate-y-1/2 mr-2 bg-white/90 text-gray-800 w-10 h-10 rounded-full shadow-xl flex items-center justify-center"
+          >
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-12 bg-gray-900 text-white py-8">
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-4 gap-8 mb-8">
+          <!-- Company Info -->
+          <div>
+            <h3 class="text-2xl font-bold mb-4">
+              <span class="text-blue-400">GIOAN</span>
+              <span class="text-red-500">LOGISTICS</span>
+            </h3>
+            <p class="text-gray-400 mb-4">
+              Premium transportation services in Nigeria. When you choose Gioan,
+              you don't just arrive — you make an entrance.
+            </p>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-blue-400 transition">
+                <i class="fab fa-facebook-f text-xl"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-blue-400 transition">
+                <i class="fab fa-twitter text-xl"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-blue-400 transition">
+                <i class="fab fa-instagram text-xl"></i>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-blue-400 transition">
+                <i class="fab fa-linkedin-in text-xl"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#home"
+                  class="text-gray-400 hover:text-white transition"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#about"
+                  class="text-gray-400 hover:text-white transition"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#services"
+                  class="text-gray-400 hover:text-white transition"
+                  >Services</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#fleet"
+                  class="text-gray-400 hover:text-white transition"
+                  >Our Fleet</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#gallery"
+                  class="text-gray-400 hover:text-white transition"
+                  >Gallery</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  class="text-gray-400 hover:text-white transition"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Services -->
+          <div>
+            <h4 class="text-lg font-semibold mb-4">Our Services</h4>
+            <ul class="space-y-2 text-gray-400">
+              <li>Corporate Rentals</li>
+              <li>Wedding Services</li>
+              <li>Airport Transfers</li>
+              <li>Escort Services</li>
+              <li>Event Rentals</li>
+              <li>VIP Handling</li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <h4 class="text-lg font-semibold mb-2">Contact Info</h4>
+            <ul class="space-y-3 text-gray-400">
+              <li class="flex items-start">
+                <i class="fas fa-map-marker-alt mr-3 mt-1 text-blue-400"></i>
+                <span
+                  >55 East/West Road, Godstime Plaza, opposite Clendac Filling
+                  Station, Port Harcourt, Nigeria</span
+                >
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-phone mr-3 text-blue-400"></i>
+                <a href="tel:+2348037396244" class="hover:text-white transition"
+                  >+234 803 739 6244</a
+                >
+              </li>
+              <li class="flex items-center">
+                <i class="fas fa-clock mr-3 text-blue-400"></i>
+                <span
+                  >Mon-Fri: 09:00AM - 07:00PM<br />Sat-Sun: 09:00AM -
+                  05:00PM</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="border-t border-gray-800 py-4 text-center">
+          <p class="text-gray-400 mb-0">
+            &copy; <span id="currentYear"></span> Gioan Logistics Nigeria
+            Limited. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+      // Gallery Slider (simple prev/next)
+      const gallery = document.querySelector(".gallery-slider");
+      const galleryPrev = document.querySelector(".gallery-prev");
+      const galleryNext = document.querySelector(".gallery-next");
+      if (gallery && galleryPrev && galleryNext) {
+        let galleryIndex = 0;
+        const galleryTotal = gallery.children.length;
+
+        function galleryGo(i) {
+          galleryIndex = (i + galleryTotal) % galleryTotal;
+          gallery.style.transform = `translateX(-${galleryIndex * 100}%)`;
+        }
+
+        galleryNext.addEventListener("click", () => {
+          galleryGo(galleryIndex + 1);
+        });
+
+        galleryPrev.addEventListener("click", () => {
+          galleryGo(galleryIndex - 1);
+        });
+
+        // swipe support
+        let gTouchStart = 0;
+        gallery.addEventListener(
+          "touchstart",
+          (e) => {
+            gTouchStart = e.touches[0].clientX;
+          },
+          { passive: true }
+        );
+        gallery.addEventListener(
+          "touchend",
+          (e) => {
+            const diff = gTouchStart - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 40)
+              diff > 0 ? galleryNext.click() : galleryPrev.click();
+          },
+          { passive: true }
+        );
+      }
+    </script>
+  </body>
+</html>
